@@ -2,9 +2,26 @@
 
 
 
+#hr = CoCreateInsatanceEx(NULL);
 
 
-dataFlow = eAll
+
+dataFlow = eRender //switch to eCapture for input
+role = eMultimedia //switch to eCommunications for that
+HRESULT GetDefaultAudioEndpoint(
+  [in]  EDataFlow dataFlow,
+  [in]  ERole     role,
+  [out] IMMDevice **ppEndpoint
+);
+
+IMMDevice currentOut = GetDefaultAudioEndpoint(dataFlow, role)
+
+
+
+
+
+
+
 dwStateMask = DEVICE_STATE_ACTIVE
 
 
@@ -42,3 +59,14 @@ const IID IID_IAudioClient  __uuidof(IAudioCaptureClient)
              [in] EDataFlow dataFlow,
              [in] ERole role,
              [out] IMMDevice **ppEndpoint);
+
+
+
+
+
+DWORD  waveInMessage(
+   UINT      uDeviceID,
+   UINT      uMsg,
+   DWORD_PTR dwParam1,
+   DWORD_PTR dwParam2
+);

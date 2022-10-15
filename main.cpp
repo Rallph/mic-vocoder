@@ -1,5 +1,6 @@
 #include <iostream>
 #include <mmdeviceapi.h>
+#include <Functiondiscoverykeys_devpkey.h>
 
 int main() {
 
@@ -15,10 +16,20 @@ int main() {
             CLSCTX_ALL, IID_IMMDeviceEnumerator,
             (void**)&pEnumerator);
 
-    IMMDeviceCollection* ppDevices = nullptr;
+    IMMDevice* ppEndpoint = nullptr;
 
-    hr = pEnumerator->EnumAudioEndpoints(eAll, DEVICE_STATE_ACTIVE, &ppDevices);
+    hr = pEnumerator->GetDefaultAudioEndpoint(eCapture, eCommunications, &ppEndpoint);
 
+    IPropertyStore* propertyStore = nullptr;
+
+    hr = ppEndpoint->OpenPropertyStore(STGM_READ, &propertyStore);
+
+    PROPVARIANT varName;
+    PropVariantInit(&varName);
+
+    propertyStore->GetValue(PKEY_Device_FriendlyName, &varName);
+
+    printf("Audio endpoint name: %S\n", varName.pwszVal);
 
 
     CoUninitialize();

@@ -72,7 +72,7 @@ DWORD  waveInMessage(
 );
 
 
-----------------------------
+/*
 
 
     CoCreateInsatanceEx???
@@ -95,3 +95,4 @@ A device collection is an object with an IMMDeviceCollection interface. Each ite
 
 IAudioEndpointVolume::SetChannelVolumeLevel
 345 dev on cloud,
+

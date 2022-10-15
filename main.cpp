@@ -10,6 +10,8 @@ int main() {
     const CLSID CLSID_MMDeviceEnumerator = __uuidof(MMDeviceEnumerator);
     const IID IID_IMMDeviceEnumerator = __uuidof(IMMDeviceEnumerator);
     const IID IID_IAudioClient           = __uuidof(IAudioClient);
+    const IID IID_IAudioRenderClient = __uuidof(IAudioRenderClient);
+    const IID IID_IAudioCaptureClient = __uuidof(IAudioCaptureClient);
 
     // create multimedia device enumerator
     IMMDeviceEnumerator* pEnumerator = nullptr;
@@ -56,6 +58,7 @@ int main() {
 
     IAudioCaptureClient* captureClient = nullptr;
     inputAudioClient->GetService(IID_IAudioCaptureClient, reinterpret_cast<void **>(&captureClient));
+
 
 
     CoUninitialize();

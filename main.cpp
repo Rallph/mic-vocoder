@@ -17,29 +17,29 @@ int main() {
             (void**)&pEnumerator);
 
     // get default audio capture device as endpoint
-    IMMDevice* ppEndpoint = nullptr;
-    hr = pEnumerator->GetDefaultAudioEndpoint(eCapture, eCommunications, &ppEndpoint);
+    IMMDevice* inputDevice = nullptr;
+    hr = pEnumerator->GetDefaultAudioEndpoint(eCapture, eCommunications, &inputDevice);
 
     // get properties of the audio endpoint
-    IPropertyStore* propertyStore = nullptr;
-    hr = ppEndpoint->OpenPropertyStore(STGM_READ, &propertyStore);
-    PROPVARIANT varName;
-    PropVariantInit(&varName);
+    IPropertyStore* inputProperties = nullptr;
+    hr = inputDevice->OpenPropertyStore(STGM_READ, &inputProperties);
+    PROPVARIANT inputDeviceName;
+    PropVariantInit(&inputDeviceName);
     // get the human-readable name of the device associated with the endpoint
-    propertyStore->GetValue(PKEY_Device_FriendlyName, &varName);
-    printf("Input Audio endpoint name: %S\n", varName.pwszVal);
+    inputProperties->GetValue(PKEY_Device_FriendlyName, &inputDeviceName);
+    printf("Input Audio endpoint name: %S\n", inputDeviceName.pwszVal);
 
-    IMMDevice* ppEndpoint2 = nullptr;
-    hr = pEnumerator->GetDefaultAudioEndpoint(eRender, eMultimedia, &ppEndpoint2);
+    IMMDevice* outputDevice = nullptr;
+    hr = pEnumerator->GetDefaultAudioEndpoint(eRender, eMultimedia, &outputDevice);
 
     // get properties of the audio endpoint
-    IPropertyStore* propertyStore2 = nullptr;
-    hr = ppEndpoint2->OpenPropertyStore(STGM_READ, &propertyStore2);
-    PROPVARIANT varName2;
-    PropVariantInit(&varName2);
+    IPropertyStore* outputProperties = nullptr;
+    hr = outputDevice->OpenPropertyStore(STGM_READ, &outputProperties);
+    PROPVARIANT outputDeviceName;
+    PropVariantInit(&outputDeviceName);
     // get the human-readable name of the device associated with the endpoint
-    propertyStore2->GetValue(PKEY_Device_FriendlyName, &varName2);
-    printf("Output Audio endpoint name: %S\n", varName2.pwszVal);
+    outputProperties->GetValue(PKEY_Device_FriendlyName, &outputDeviceName);
+    printf("Output Audio endpoint name: %S\n", outputDeviceName.pwszVal);
 
 
 

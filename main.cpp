@@ -50,6 +50,13 @@ int main() {
     IAudioRenderClient* renderClient = nullptr;
     outputAudioClient->GetService(IID_IAudioRenderClient, reinterpret_cast<void **>(&renderClient));
 
+    // activate input client interface
+    IAudioClient* inputAudioClient = nullptr;
+    inputDevice->Activate(IID_IAudioClient, CLSCTX_ALL, nullptr, reinterpret_cast<void **>(&inputAudioClient));
+
+    IAudioCaptureClient* captureClient = nullptr;
+    inputAudioClient->GetService(IID_IAudioCaptureClient, reinterpret_cast<void **>(&captureClient));
+
 
     CoUninitialize();
     std::cout << "Hello, World!" << std::endl;

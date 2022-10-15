@@ -1,5 +1,6 @@
 #include <iostream>
 #include <mmdeviceapi.h>
+#include <audioclient.h>
 #include <Functiondiscoverykeys_devpkey.h>
 
 int main() {
@@ -8,6 +9,7 @@ int main() {
 
     const CLSID CLSID_MMDeviceEnumerator = __uuidof(MMDeviceEnumerator);
     const IID IID_IMMDeviceEnumerator = __uuidof(IMMDeviceEnumerator);
+    const IID IID_IAudioClient           = __uuidof(IAudioClient);
 
     // create multimedia device enumerator
     IMMDeviceEnumerator* pEnumerator = nullptr;
@@ -41,7 +43,12 @@ int main() {
     outputProperties->GetValue(PKEY_Device_FriendlyName, &outputDeviceName);
     printf("Output Audio endpoint name: %S\n", outputDeviceName.pwszVal);
 
+    // activate output client interface
+    IAudioClient* outputAudioClient = nullptr;
+    outputDevice->Activate(IID_IAudioClient, CLSCTX_ALL, nullptr, reinterpret_cast<void **>(&outputAudioClient));
 
+    IAudioRenderClient* renderClient = nullptr;
+    outputAudioClient->GetService(IID_IAudioRenderClient, reinterpret_cast<void **>(&renderClient));
 
 
     CoUninitialize();

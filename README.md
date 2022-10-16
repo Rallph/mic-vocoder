@@ -6,15 +6,25 @@ This is the frame for a middle step of changing the inputed audios frequencies, 
 
 Development Progress Steps:
 [X] Get Input Device 
-[X] Get Output Device
+
+[X] Get Output Device 
+
 [X] Initialization and Prep of Devices
+
 [ ] Shared buffer getting/loading/releasing
+
 [ ] Audio out
+
 [ ] Vocode audio
+
 [ ] Output vocoded audio. 
+
 [ ] Simple GUI (reach idea)
+
 [ ] GUI manipulation inputs/toggles (reach idea)
+
 [ ] Package/Imaging (reach idea)
+
 [ ] Success!
 
 

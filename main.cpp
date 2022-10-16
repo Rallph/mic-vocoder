@@ -68,6 +68,7 @@ int main() {
 //
 //
 //------------------------------------------------------------
+/*
 
 
 
@@ -120,9 +121,10 @@ int main() {
     hr = inputDevice->Stop(); //Done
     hr = outputDevice->Stop(); //Stop
 
+*/
 
 //Close-out------------------------------------------------------------
     CoUninitialize();
-    std::cout << "Got to the end(almost) without crashing!" << std::endl;
+//    std::cout << "Got to the end(almost) without crashing!" << std::endl;
     return hr;
 }
